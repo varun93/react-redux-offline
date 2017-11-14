@@ -11,3 +11,6 @@ TODO app to demonstrate how to build offline apps in redux using redux-offline l
 1. `npm dev` for dev server 
 
 **Note** : Be sure to replace the link to the mongo DB server in server.js.
+
+## Contributors
+1. Varun Hegde(1hvarun@gmail.com)
