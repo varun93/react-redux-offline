@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Quotes App</title>
+</head>
+<body>
+
+  <ul class="quotes">
+  <% for(var i=0; i<quotes.length; i++) {%>
+    <li class="quote">
+      <span><%= quotes[i].name %></span>
+      <span><%= quotes[i].quote %></span>
+    </li>
+  <% } %>
+  </ul>
+
+  <form action="/quotes" method="POST">
+    <input type="text" placeholder="name" name="name">
+    <input type="text" placeholder="quote" name="quote">
+    <button type="submit">Submit</button>
+  </form>
+
+  
+  <div>
+    <h2>Replace last quote written by Master Yoda with a quote written by Darth Vadar</h2>
+    <button id="update"> Darth Vadar invades! </button>
+  </div>
+
+  <div>
+    <h2>Delete Darth Vadar's first quote</h2>
+    <button id="delete"> Delete first Darth Vadar quote </button>
+  </div>
+
+<script>
+    
+  // main.js
+  // update the quote
+  var update = document.getElementById('update');
+
+  update.addEventListener('click', function () {
+   
+    // update action
+
+
+    fetch('quotes', {
+      method: 'put',
+      headers: {'Content-Type': 'application/json'},
+      body : JSON.stringify({
+          'name': 'Darth Vader',
+          'quote': 'I find your lack of faith disturbing.'
+      })
+    }).then(res => {
+        if (res.ok) return res.json();
+    })
+    .then(data => {
+      console.log(data);
+      window.location.reload(true);
+    })
+
+  });
+
+
+  // delete the quote
+  var del = document.getElementById('delete');
+
+  del.addEventListener('click', function () {
+    fetch('quotes', {
+      method: 'delete',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        'name': 'Darth Vader'
+      })
+    })
+    .then(res => {
+      if (res.ok) return res.json()
+    }).
+    then(data => {
+      console.log(data)
+      window.location.reload()
+    })
+  });
+
+
+</script>
+</body>
+</html>
